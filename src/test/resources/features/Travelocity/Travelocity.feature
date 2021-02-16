@@ -20,25 +20,6 @@
 Feature: El usuario puede gestionar sus viajes
 y acceder a las distintas opciones que ofrece travelocity
 
-  @CrearCuenta
-  Scenario Outline: El usuario se registra en travelocity
-    Given Ingreso a la opcion iniciar sesion y seleccion crear cuenta
-    And Ingreso los datos que requiere el formulario <Nombre> <Apellidos> <Correo> <Contrasena> 
-    When la cuenta ha sido creada	
-    Then Ingreso a a mi perfil de usuario y valido mis datos
-    Examples: 
- 		| Nombre  | Apellidos | Correo               | Contrasena   |
-    | pruebas2		| pruebas2	| pruebas2@yopmail.com | david1234		|
-
-  @IniciarSesion
-  Scenario Outline: El usuario Inicia Sesion en travelocity
-    Given Ingreso al portal
-    When Inicio sesion	<Correo><Contrasena> 
-    Then Valido Ingreso Exitoso
-    Examples: 
- 		| Nombre   | Apellidos | Correo               | Contrasena   |
-    | "pruebas2" | "pruebas2"|"pruebas2@gmail.com"| "david1234" |
-    
   @BuscarHotel
   Scenario Outline: El usuario busca un hotel
     Given Ingreso a la opcion hotel en la vista principal del portal
@@ -47,40 +28,44 @@ y acceder a las distintas opciones que ofrece travelocity
     Then Ingreso a un resultado
      Examples: 
  		| destino   | origen | Correo               | Contrasena   |
-    | "bogota" | "cali"|"pruebas2@gmail.com"| "david1234" |
+    | "bogota"  | "cali" | "pruebas2@gmail.com" | "david1234"  |
    
-  @BuscarAutos
-  Scenario: El usuario busca un Auto
-    Given Ingreso a la opcion Autos en la vista principal del portal
-    And realizo el filtro de busqueda
-    When aparecen los resultados de la busqueda, valido la busqueda
-    Then Ingreso a un resultado
+  @BuscarAutosRentadeAutos
+  Scenario Outline: El usuario busca Renta de Autos
+    Given Ingreso a la opcion Autos/renta de autos en la vista principal del portal
+    And realizo el filtro de busqueda de renta de autos / codigo de descuento coporativo o concentrado <entrega><entrega2>
+    When aparecen los resultados de renta de autos, valido la busqueda
+    Then Ingreso a una renta de auto y valido el resultado
+     Examples: 
+    | entrega   | entrega2 | Correo               | Contrasena   |
+    | "bogota"  | "cali"   | "pruebas2@gmail.com" | "david1234"  |
     
   @BuscarPaquetes
-  Scenario: El usuario busca Paquetes
+  Scenario Outline: El usuario busca Paquetes
     Given Ingreso a la opcion Paquetes en la vista principal del portal
-    And realizo el filtro de busqueda
-    When aparecen los resultados de la busqueda, valido la busqueda
-    Then Ingreso a un resultado
-   @BuscarVuelos
-   Scenario: El usuario busca Vuelos
-    Given Ingreso a la opcion vuelos en la vista principal del portal
-    And realizo el filtro de busqueda
-    When aparecen los resultados de la busqueda, valido la busqueda
-    Then Ingreso a un resultado
-   @BuscarActividades
-   Scenario: El usuario busca Actividades
-    Given Ingreso a la opcion actividades en la vista principal del portal
-    And realizo el filtro de busqueda
-    When aparecen los resultados de la busqueda, valido la busqueda
-    Then Ingreso a un resultado
+    When realizo el filtro de busqueda de paquetes de viaje  <destino><origen>
+    Then aparecen los resultados de busqueda de paquetes, valido la busqueda
+  	 Examples: 
+    	| destino   | origen | Correo               | Contrasena   |
+      | "bogota"  | "cali" | "pruebas2@gmail.com" | "david1234"  |
     
-  @Tag
-  Scenario Outline: Title of your scenario outline
-    Given I want to write a step with <name>
-    When I check for the <value> in step
-    Then I verify the <status> in step
-
-    Examples: 
- 		| Nombre  | Apellidos | Correo               | Contrasena   |
-    | David		| Antonio		| dricaurtep@gmail.com | david1234		|
+    
+   @BuscarVuelosViajeRedondo
+   Scenario Outline: El usuario busca Vuelos de tipo viaje redondo
+    Given Ingreso a la opcion vuelos/viaje redondo en la vista principal del portal
+    And realizo el filtro de busqueda de vuelos/viaje redondo <destino><origen>
+    When aparecen los resultados de los vuelos, valido la busqueda
+    Then selecciono un vuelo y valido el resultado
+     Examples: 
+    | destino   | origen   | Correo               | Contrasena   |
+    | "bogota"  | "cali"   | "pruebas2@gmail.com" | "david1234"  |
+   @BuscarActividades
+   Scenario Outline: El usuario busca Actividades
+    Given Ingreso a la opcion actividades en la vista principal del portal
+    When realizo el filtro de busqueda de actividad <origen>
+    Then aparecen los resultados de la busqueda de actividad, valido la busqueda
+     Examples: 
+    | destino   | origen   | Correo               | Contrasena   |
+    | "bogota"  | "cali"   | "pruebas2@gmail.com" | "david1234"  |
+    
+  

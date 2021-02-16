@@ -9,7 +9,12 @@ import net.serenitybdd.cucumber.CucumberWithSerenity;
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions (
 features = "src/test/resources/features/Travelocity/Travelocity.feature", 
-tags = " @BuscarHotel", 
+//@BuscarHotel
+//@BuscarAutosRentadeAutos
+//@BuscarPaquetes
+//@BuscarVuelosViajeRedondo
+//@BuscarActividades
+tags = "@BuscarAutosRentadeAutos", 
 glue = "proyecto_travelocity.Definitions",
 snippets = SnippetType.CAMELCASE)
 

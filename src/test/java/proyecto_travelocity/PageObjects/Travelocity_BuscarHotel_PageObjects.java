@@ -12,11 +12,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.server.handler.FindElement;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 
 import net.serenitybdd.core.pages.PageObject;
+import proyecto_travelocity.Runner.Configuracion;
 
 public class Travelocity_BuscarHotel_PageObjects extends PageObject{
 
+	Configuracion Configuracion;
 	
 	String mes = "April 2021";
 	String dia = "10";
@@ -25,13 +28,11 @@ public class Travelocity_BuscarHotel_PageObjects extends PageObject{
 	
 	public void lanzarNavegador() {
 		
-		
 		try {
 			getDriver().navigate().to("https://www.travelocity.com/");
 			Thread.sleep(3000);
 			getDriver().manage().window().maximize();
 		} catch (InterruptedException e) {
-		
 			e.printStackTrace();
 		}
 		
@@ -346,8 +347,8 @@ public class Travelocity_BuscarHotel_PageObjects extends PageObject{
 
 	private boolean elementoBusquedaExiste() { 
 		try { 
-			
-			getDriver().findElement(By.id("sort")); 
+			Thread.sleep(3000);
+			getDriver().findElement(By.xpath("//*[@id=\"app-layer-base\"]/div/div/div/div[1]/div/section/div/form/div[8]/button")); 
 			Thread.sleep(3000);
 		} 
 		catch (NoSuchElementException | InterruptedException e) {
@@ -380,16 +381,18 @@ public class Travelocity_BuscarHotel_PageObjects extends PageObject{
 		}
 
 		private boolean ingresoResultado() { 
-			try { 
+			try {
+				Thread.sleep(6000);
+				Configuracion.posicion_pestana_siguiente();
+				((JavascriptExecutor)getDriver()).executeScript("scroll(0,400)");
+				getDriver().findElement(By.xpath("//h2[contains(text(),'About this area')]"));
 				
-				getDriver().findElement(By.xpath("//button[contains(text(),'Reserve')]")); 
 				Thread.sleep(3000);
-			} 
-			catch (NoSuchElementException | InterruptedException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-				return false; 
-				} 
-			return true; 
+				return false;
+			}
+				return true;
 			
 			}
 			
